@@ -1,0 +1,15 @@
+  $eid = intval($_GET['invoice']);
+  $isql = "SELECT * from tbname WHERE id = :in";
+  $iprp = $pdo->prepare($isql);
+	$iprp->bindParam(':in', $eid, PDO::PARAM_STR);
+	$iprp->execute();
+	$inrslts=$iprp->fetchAll(PDO::FETCH_OBJ);
+	$in_t = $iprp->rowCount();
+	if($in_t > 0){
+	foreach($inrslts as $inrslt)
+	{
+  
+  
+  }
+  
+  }
