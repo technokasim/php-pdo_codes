@@ -1,0 +1,5 @@
+    $ustmt = $pdo->prepare("SELECT * FROM users WHERE id = :ini");
+    $ustmt->bindParam(':ini', $re_id, PDO::PARAM_STR);
+    $ustmt->execute();
+    $user_ids = $ustmt->fetch();
+    $user_name = $user_ids['username'];
