@@ -1,0 +1,68 @@
+
+
+jquery 
+
+
+      // barcode search 
+                $('.bsearch-box input[type="text"]').on("keyup input", function(){
+                    /* Get input value on change */
+                    var inputVal = $(this).val();
+                    var operation = "bsearch";
+                    var csrf = $('#csrf_data').val();
+                    var resultDropdown = $(this).siblings(".bresult");
+                    if(inputVal.length){
+                    $.ajax({
+                        url:"***/***.php",
+                        method:"POST",
+                        data:{inputVal:inputVal,csrf:csrf, operation:operation},
+                        success:function(data)
+                        {  
+                        
+                        resultDropdown.html(data);
+                        }
+                    });
+                    } else{
+                        resultDropdown.empty();
+                    }
+                });
+
+
+
+                //   barcode fetch 
+                $(document).on("click", ".bresult p", function(){
+                    $(this).parents(".bsearch-box").find('input[type="text"]').val($(this).text());
+                    $(this).parent(".bresult").empty();
+                    var searched = $('#p_barcode').val();
+                    var operation = "barcodefetch";
+                    var csrf = $('#csrf_data').val();
+                    $.ajax({
+                        url:"**/***.php",
+                        method:"POST",
+                        data:{searched:searched,csrf:csrf, operation:operation},
+                        dataType:"json",
+                        success:function(data)
+                        {  
+                        $('#p_id').val(data.p_id);
+                        $('#p_barcode').val(data.p_barcode);
+                        $('#searched').val(data.p_name);
+                        $('#p_offer_p').val(data.p_offer_p);
+                        $('#p_cost').val(data.p_cost);
+                        $('#p_mrp').val(data.p_mrp);
+                        }
+                    });    
+                });
+                
+                
+                
+                
+                result from pdo
+                
+                
+                	foreach($edsults as $ed_result)
+	{
+        echo "<p>" . $ed_result->barcode . "</p>";
+	} 
+		}
+		else{
+            echo "<p>No matches found</p>";
+         }
